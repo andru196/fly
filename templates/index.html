@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Fly Easy{% endblock title %}
+{% block log%}
+    <div id="prof"> <a href="profile"><img src="{% if user.ExtraUser.avatar == None %}
+    {% load staticfiles %}
+    {% static "img/face.jpg" %}
+    {% else %}
+   {{ user.ExtraUser.avatar.url }}
+{% endif %}">{{user.username}}</a> <a href="logout">Выйти</a></div>
+<span id="error">{{log}}</span>
+{% endblock log %}
+{% block content%}
+    {% if form  != None %}
+    <form method="POST">
+    {% csrf_token %}
+        {{form}}
+        <input value="найти" type="submit">
+    </form>
+    <script>document.getElementById("id_ddt").type="date";</script>
+    {% else %}
+
+
+    {% endif %}
+{% endblock content %}

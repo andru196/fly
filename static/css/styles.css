@@ -1,0 +1,155 @@
+body{
+    margin: 0px;
+}
+.log{
+    float: right;
+    margin-right: 5%;
+}
+.log a{
+    text-align: right;
+    text-decoration: none;
+    color: orange;
+    font-size: 22px;
+    text-transform: uppercase;
+    display: block;
+}
+.log a:hover{
+    color: white;
+    font-size: 23px;
+}
+
+form {
+    margin-top: 30px;
+    max-width: 700px;
+    min-width: 200px;
+    margin-left: 10%;
+    right: 10%;
+    background-color: skyblue;
+    padding: 1%;
+    border: solid blue 15px;
+    border-radius: 25px;
+}
+form h3{
+    text-transform:uppercase;
+    color: dimgrey;
+    text-align: center;
+}
+form:hover input
+{
+    background-color: aliceblue;
+    outline: solid yellow 1px;
+}
+form:hover h3
+{
+    color: blue;
+}
+form input{
+    display: block;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+    border: 0;
+    color: blue;
+    font-size: 25px;
+    font-weight: bolder;
+}
+form input:last-of-type{
+    font-size: 24px;
+    height: 40px;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    margin-top: 10px;
+}
+form input:last-of-type:hover{
+    background-color: azure;
+    color: darkblue;
+}
+
+.header{
+    min-height: 100px;
+    width: 96%;
+    background-color: #183bd9;
+    padding: 2%;
+    border-bottom: solid #183bd9 5px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    top: 0;
+    width: 98%;
+}
+.alogo
+{
+    text-decoration: none;
+}
+.logo{
+    float: left;
+    width: 80px;
+    height: 80px;
+    border: solid white 6px;
+    border-radius: 50%;
+}
+.logo:hover{
+    border-color: yellow;
+}
+.logo:hover h4
+{
+    color: #ffc800
+}
+
+.logo h4
+{
+    font-family: arial;
+    font-style: italic;
+    font-size: 20px;
+    margin-left: 25%;
+    margin-right: 10%;
+    margin-top: 20%;
+    margin-bottom: 30%;
+    color: yellow;
+}
+footer
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    border-bottom: solid #1050d0 5px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    background-color: #1050d0;
+}
+footer p{
+    float: right;
+    margin-right: 10%;
+}
+#prof{
+    border: solid white 1px;
+    border-bottom-left-radius: 30px;
+    width: 150px;
+}
+#prof a:last-child{
+    font-size: 14px;
+}
+#prof a:last-child:hover{
+    font-size: 14px;
+    color: red;
+}
+#error{
+    color: red;
+    font-weight: bold;
+    text-align: right;
+    float: right;
+}
+
+#prof a img {
+    border-radius: 50%;
+    border: solid white 1px;
+    max-width: 35px;
+    max-height: 35px;
+    height: 80%;
+    display: block;
+    float: left;
+    margin-left: 10%;
+    margin-top: 2%;
+}

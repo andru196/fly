@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Ваш аккаунт{% endblock title %}
+{% block style %}
+    #forma
+    {
+        margin-left: 0;
+        float: right;
+        margin-right: 10%;
+        max-width: 50%;
+    }
+    #img_form{
+        border: 1px;
+        margin-left: 10%;
+        max-width: 300px;
+        padding: 1px;
+
+    }
+    #ava {
+    max-width: 300px;
+    max-heigth: 300px;
+    margin: 30px;
+    margin-left: 10%;
+    }
+{% endblock style %}
+{% block log%}
+    <div id="prof"> <a href="profile">{{user.username}}</a> <a href="logout">Выйти</a></div>
+{% endblock log %}
+{% block content%}
+    <img id="ava" src="{% if user.ExtraUser.avatar == None %}
+    {% load staticfiles %}
+    {% static "img/face.jpg" %}
+    {% else %}
+   {{ user.ExtraUser.avatar.url }}
+{% endif %}">
+    <form method="post" id="forma">
+{% csrf_token %}
+        {{ form }}
+ <input type="submit" value="Сохранить" ></form>
+<form action="{% url 'upload_pic' %}" method="post" id="img_form" enctype="multipart/form-data">{% csrf_token %}
+    <p>
+        <input id="id_image" type="file" class="" name="image">
+    </p>
+</form>
+    {% load staticfiles %}
+    <script src="{% static "js/prof.js" %}"></script>
+    <script>
+    document.getElementById("id_firstname").value = "{{ user.first_name }}";
+    document.getElementById("id_lastname").value = "{{ user.last_name }}";
+    document.getElementById("id_email").value = "{{ user.email }}";
+    document.getElementById("id_about").type = "text";
+    document.getElementById("id_about").value = "{{ get_info }}";
+    prof();
+    </script>
+{% endblock content %}

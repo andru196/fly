@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Авторизация{% endblock title %}
+{% block log%}
+    <a href="/reg">Регистрация</a>
+<span id="error">{{log}}</span>
+{% endblock log %}
+{% block content%}
+<form method="post">
+<h3>Авторизация</h3>
+{% csrf_token %}
+        {{ form }}
+ <input type="submit" value="войти" >
+</form>
+{% endblock content %}
