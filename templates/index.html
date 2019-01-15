@@ -18,7 +18,15 @@
     </form>
     <script>document.getElementById("id_ddt").type="date";</script>
     {% else %}
-
-
+ <table>
+        <tr>
+    <th>Время вылета</th><th>Время прибытия</th><th>Место выета</th><th>Место посадки</th>
+  </tr>
+    {% for element in data %}
+       <tr>
+       <td>{{ element.dep_time }}</td><td>{{ element.arr_time }}</td><td>{{ element.dep_point }}</td><td>{{ element.arr_point }}</td>
+       </tr>
+    {% endfor %}
+        </table>
     {% endif %}
 {% endblock content %}

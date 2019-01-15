@@ -1,8 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms.models import modelform_factory
-from django import forms
-
 
 
 class UserFly(User):
@@ -62,5 +60,6 @@ class   Ticket(models.Model):
 class ExampleModel(models.Model):
     model_pic = models.ImageField(upload_to = 'user_media/', blank=True)
 
-
+FormFAdd = modelform_factory(Flight, fields=("dep_time", "arr_time", "dep_point", "arr_point"))
+FormTAdd = modelform_factory(Ticket, fields=("cost", "flight"))
 FormImg = modelform_factory(ExampleModel, fields=("model_pic",))

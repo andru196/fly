@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Мои  билеты{% endblock title %}
+{% block  style %}
+    table {
+    margin: 5%;
+  border-collapse: collapse;
+  line-height: 1.1;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  background:  radial-gradient(farthest-corner at 50% 50%, white, #DCECF8);
+  color: #0C213B;
+}
+    th {
+  padding: 10px;
+  border: 1px solid #A9E2CC;
+}
+    td {
+  font-size: 0.8em;
+  padding: 5px 7px;
+  border: 1px solid #A9E2CC;
+}
+
+{% endblock style %}
+{% block log%}
+    <div id="prof"> <a href="profile"><img src="{% if user.ExtraUser.avatar == None %}
+    {% load staticfiles %}
+    {% static "img/face.jpg" %}
+    {% else %}
+   {{ user.ExtraUser.avatar.url }}
+{% endif %}">{{user.username}}</a> <a href="logout">Выйти</a></div>
+<span id="error">{{log}}</span>
+{% endblock log %}
+{% block content%}
+    {% if len == 0 %}
+    <h1>Билетов пока нет</h1>
+    {% else %}
+        <table>
+        <tr>
+    <th>Время вылета</th><th>Время прибытия</th><th>Место выета</th><th>Место посадки</th><th>Цена, руб.</th>
+  </tr>
+    {% for element in data %}
+       <tr>
+       <td>{{ element.flight.dep_time }}</td><td>{{ element.flight.arr_time }}</td><td>{{ element.flight.dep_point }}</td><td>{{ element.flight.arr_point }}</td><td>{{ element.cost }}</td>
+       </tr>
+    {% endfor %}
+        </table>
+    {% endif %}
+{% endblock content %}

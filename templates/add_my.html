@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Добавление билета{% endblock title %}
+{% block  style %}
+    #tick{
+        float: left;
+        width: 10%;
+        margin-right: 0;
+    }
+    #fly{
+    margin-left: 0;
+    width: 50%;
+    float: right;
+    margin-right: 10%;
+    }
+{% endblock style %}
+{% block log%}
+    <div id="prof"> <a href="profile"><img src="{% if user.ExtraUser.avatar == None %}
+    {% load staticfiles %}
+    {% static "img/face.jpg" %}
+    {% else %}
+   {{ user.ExtraUser.avatar.url }}
+{% endif %}">{{user.username}}</a> <a href="logout">Выйти</a></div>
+<span id="error">{{log}}</span>
+{% endblock log %}
+{% block content%}
+
+    <form id="tick" method="POST">
+    <h3>Добавление билета</h3>
+        {% csrf_token %}
+    {{ form }}
+        <input type="submit">
+    </form >
+        <form id="fly" method="POST">
+            <h3>Добавление рейса</h3>
+                {% csrf_token %}
+            {{ form0 }}
+        <input type="submit">
+        </form>
+      <script>
+      document.getElementById("id_dep_time").type="datetime-local";
+      document.getElementById("id_arr_time").type="datetime-local";
+      </script>
+{% endblock content %}

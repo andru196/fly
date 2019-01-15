@@ -14,7 +14,7 @@ class RegistrForm(forms.Form):
 
 class SearchForm(forms.Form):
     dep = forms.CharField(required=False, max_length=50)
-    acc = forms.CharField(required=False, max_length=50)
+    arr = forms.CharField(required=False, max_length=50)
     ddt = forms.DateField(required=False)
 
 

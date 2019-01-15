@@ -29,7 +29,9 @@ urlpatterns = [
     re_path(r'^reg/(?P<log>\d+)', views.regist),
     re_path(r'^reg', views.regist),
     re_path(r'^logout', views.log_out),
-    path('^upload_pic', views.upload_pic, name="upload_pic"),
+    path('add_my', views.add_my_ticket),
+    path('my_tick', views.my_tick),
+    path('upload_pic', views.upload_pic, name="upload_pic"),
     re_path(r'^', views.index),
 
     path('admin/', admin.site.urls),

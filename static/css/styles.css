@@ -153,3 +153,20 @@ footer p{
     margin-left: 10%;
     margin-top: 2%;
 }
+
+#prof ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+}
+
+	#prof ul li:hover > ul {
+    display:inherit;
+}
+/* первый уровень выпадающего списка */
+#prof ul ul li {
+    min-width:170px;
+    float:none;
+    display:list-item;
+    position: relative;
+}

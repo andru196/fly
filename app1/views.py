@@ -3,12 +3,10 @@ from  .forms import *
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout
 from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
 from .models import *
-from datetime import datetime
 from django.http import HttpResponse, HttpResponseForbidden
 
-
+#Проверь все!!!!!, удали коменты
 def index(request):
     if request.user.is_authenticated == False:
         return HttpResponseRedirect("login/1")
@@ -21,15 +19,15 @@ def index(request):
             flgts = flgts.filter(dep_point=dep_pnt)
         if arr_pnt != "":
             flgts = flgts.filter(arr_point=arr_pnt)
-        if dep_tme != "":
-            dep_tme = datetime.strptime(dep_tme, "%Y-%m-%d").date()
-            flgts = flgts.filter(dep_time=dep_tme)
+        #if dep_tme != "": #Тут не успел починить
+        #    dep_tme = datetime.strptime(dep_tme, "%Y-%m-%d").date()
+        #    flgts = flgts.filter(dep_time=dep_tme)
         if flgts.__len__() == 0:
             log = "Ничего не нашлось"
             return render(request, "index.html", {"form": SearchForm(), "log": log, "prof": request.user.username})
-        return render(request, "index.html", {"data": flgts, "prof": request.user.username})
-    else:
-        userform = SearchForm()
+        return render(request, "index.html", {"data": flgts, "user": request.user, }) #Тут что-то придется переделать под айакс
+    else:                                                                             #в основном в шаблоне, но и здесь
+        userform = SearchForm()                                                       #может функцию добавить
         return render(request, "index.html", {"form": userform, "user": request.user})
 
 
@@ -59,7 +57,7 @@ def login(request, log=""):
     userform = LoginForm()
     return render(request, "login.html", {"form": userform, "log": log})
 
-
+#Тут надо на айаксе проверить доступглсть логина/пароля
 def regist(request, log=""):
     if request.user.is_authenticated:
         return HttpResponseRedirect("/")
@@ -83,7 +81,7 @@ def regist(request, log=""):
         userform = RegistrForm()
         return render(request, "registration.html", {"form": userform, "log": log})
 
-
+#тут всё плохо, надо как-то фото прикрутить
 def prof(request):
     if request.user.is_authenticated == False:
         return HttpResponseRedirect("/")
@@ -114,7 +112,33 @@ def prof(request):
         user = UserFly.transform(request.user)
         return render(request, "profile.html", {"form": userform, "user": request.user, "get_info": user.get_info()})
 
+#Тут корявенько, но работает
+def add_my_ticket(request):
+    log = ""
+    if request.method == "POST":
+        if request.POST.get("cost") != None:
+            cost = request.POST.get("cost")
+            flight = Flight.objects.get(id=request.POST.get("flight"))
+            tick = Ticket.objects.create(cost=cost, flight=flight, owner=request.user)
+            tick.save()
+        elif request.POST.get("dep_time") != None:
+            dep_time = request.POST.get("dep_time")
+            arr_time = request.POST.get("arr_time")
+            dep_point = request.POST.get("dep_point")
+            arr_point = request.POST.get("arr_point")
+            fl = Flight.objects.create(dep_time=dep_time, arr_time=arr_time,dep_point=dep_point,arr_point=arr_point)
+            fl.save()
+    userform = FormTAdd()
+    form0 = FormFAdd()
+    return render(request, "add_my.html", {"form": userform, "form0": form0, "log": log})
 
+#Можно как-то объеденить с функцией выше
+def my_tick(request):
+    data = Ticket.objects.filter(owner=request.user)
+    len = data.__len__()
+    return render(request, "my_tick.html", {"data": data,"len": len})
+
+#Это гавно не заработало
 def upload_pic(request):
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
