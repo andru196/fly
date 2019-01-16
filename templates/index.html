@@ -11,12 +11,29 @@
 {% endblock log %}
 {% block content%}
     {% if form  != None %}
-    <form method="POST">
+    <form method="POST" id="my_form">
     {% csrf_token %}
         {{form}}
-        <input value="найти" type="submit">
+        <input value="найти" type="button" id="search">
     </form>
+        {% load staticfiles %}
+        <script src="{% static "js/jquery.js" %}"></script>
+        <script src="{% static "js/ajax.js" %}"></script>
+        <script src="{% static "js/search.js" %}"></script>
     <script>document.getElementById("id_ddt").type="date";</script>
+        {% with arr="1234" %}
+        <table style="display:none" id="table_rez">
+        <tr>
+    <th>Время вылета</th><th>Время прибытия</th><th>Место выета</th><th>Место посадки</th>
+  </tr>
+    {% for el in arr %}
+       <tr>
+       <td id="dtm{{ el }}"></td><td id="atm{{ el }}"></td><td id="dpt{{ el }}"></td><td id="apt{{ el }}"></td>
+       </tr>
+    {% endfor %}
+        </table>
+            <div id="btns"></div>
+        {% endwith %}
     {% else %}
  <table>
         <tr>

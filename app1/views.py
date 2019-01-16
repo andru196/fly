@@ -1,16 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from  .forms import *
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout
 from django.http import HttpResponseRedirect
 from .models import *
 from django.http import HttpResponse, HttpResponseForbidden
+import json
+import datetime
+
 
 #Проверь все!!!!!, удали коменты
 def index(request):
     if request.user.is_authenticated == False:
         return HttpResponseRedirect("login/1")
-    if request.method == "POST":
+    """if request.method == "POST":
         dep_pnt = request.POST.get("dep")
         arr_pnt = request.POST.get("arr")
         dep_tme = request.POST.get("ddt")
@@ -26,9 +29,58 @@ def index(request):
             log = "Ничего не нашлось"
             return render(request, "index.html", {"form": SearchForm(), "log": log, "prof": request.user.username})
         return render(request, "index.html", {"data": flgts, "user": request.user, }) #Тут что-то придется переделать под айакс
-    else:                                                                             #в основном в шаблоне, но и здесь
-        userform = SearchForm()                                                       #может функцию добавить
-        return render(request, "index.html", {"form": userform, "user": request.user})
+    else:"""                                                                             #в основном в шаблоне, но и здесь
+    userform = SearchForm()                                                       #может функцию добавить
+    return render(request, "index.html", {"form": userform, "user": request.user})
+
+
+###############################################
+#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX##
+###############################################
+
+def returner_flights(flights):
+    arr = []
+    i = 0
+    for el in flights:
+        arr.append({"from": el.dep_point, "to": el.arr_point, "time": str(el.dep_time), "time2": str(el.arr_time)})
+    return json.dumps(arr)
+
+
+def returner_indexes(flights):
+    arr = []
+    i = 0
+    for el in flights:
+        arr.append(el.id)
+    return json.dumps(arr)
+
+
+def search(request):
+    dep_pnt = request.GET.get("dep")
+    arr_pnt = request.GET.get("arr")
+    dep_time = request.GET.get("ddt")
+    id1 = request.GET.get("id1")
+    if id1 != None:
+        id1 = int(id1)
+        if id1 != 0:
+            rez = Flight.objects.get(id=id1)
+        return HttpResponse(returner_flights((rez,)))
+    flgts = Flight.objects.all()
+    if dep_pnt != "":
+        flgts = flgts.filter(dep_point=dep_pnt)
+    if arr_pnt != "":
+        flgts = flgts.filter(arr_point=arr_pnt)
+    #if dep_time != "": #Тут не успел починить
+    #    dep_time = datetime.strptime(dep_time, "%Y-%m-%d")
+    #    flgts = flgts.filter(dep_time__mt=dep_time)
+    return HttpResponse(returner_indexes(flgts))
+
+
+
+
+
+###############################################
+#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX##
+###############################################
 
 
 def log_out(request):

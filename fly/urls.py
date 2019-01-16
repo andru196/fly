@@ -23,6 +23,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', views.index, name='home'),
+
     re_path(r'^login/(?P<log>\d+)', views.login),
     re_path(r'^login', views.login),
     re_path(r'^prof', views.prof),
@@ -32,9 +33,9 @@ urlpatterns = [
     path('add_my', views.add_my_ticket),
     path('my_tick', views.my_tick),
     path('upload_pic', views.upload_pic, name="upload_pic"),
-    re_path(r'^', views.index),
-
     path('admin/', admin.site.urls),
+    path('search_view/', views.search),
+    re_path(r'^', views.index),
 ]
 #if settings.DEBUG:
 #    urlpatterns += ('',

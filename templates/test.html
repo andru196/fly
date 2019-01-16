@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Авторизация{% endblock title %}
+{% block log%}
+    <a href="/reg">Регистрация</a>
+<span id="error">{{log}}</span>
+{% endblock log %}
+{% block content%}
+<h1>Hello {{ variable }}, welcome to my awesome site</h1>
+{% load staticfiles %}
+    <script src="{% static "js/jquery.js" %}"></script>
+{% endblock content %}
