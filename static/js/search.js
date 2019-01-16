@@ -59,13 +59,14 @@ function searcher1() {
             document.getElementById("btns").appendChild(b);
             for (var i=0; i < datas.length; i++)
             {
-                if (datas.length % 4 == 0)
+                console.log(i);
+                if ((i) % 4 == 0 && i != 0)
                 {
                     j++;
                     b = document.createElement("input");
                     b.onclick = (get_info(i));
                     b.type = ("button");
-                    b.val(j);
+                    b.value = (j);
                     document.getElementById("btns").appendChild(b);
                 }
 
