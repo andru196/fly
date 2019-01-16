@@ -75,8 +75,14 @@ def search(request):
     return HttpResponse(returner_indexes(flgts))
 
 
-
-
+def add_f(request):
+    dep_pnt = request.GET.get("dep")
+    arr_pnt = request.GET.get("arr")
+    dep_time = request.GET.get("dep_time")
+    arr_time = request.GET.get("arr_time")
+    fl = Flight.objects.create(dep_time=dep_time, arr_time=arr_time, dep_point=dep_pnt, arr_point=arr_pnt)
+    fl.save()
+    return HttpResponse(fl)
 
 ###############################################
 #AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX##

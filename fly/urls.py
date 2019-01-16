@@ -34,6 +34,7 @@ urlpatterns = [
     path('my_tick', views.my_tick),
     path('upload_pic', views.upload_pic, name="upload_pic"),
     path('admin/', admin.site.urls),
+    path('add_f/', views.add_f),
     path('search_view/', views.search),
     re_path(r'^', views.index),
 ]

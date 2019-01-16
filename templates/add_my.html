@@ -33,8 +33,19 @@
         <form id="fly" method="POST">
             <h3>Добавление рейса</h3>
                 {% csrf_token %}
-            {{ form0 }}
-        <input type="submit">
+            {% for field in form0 %}
+        <div class="form-group">
+            {{field.label_tag}}
+            <div>{{field}}</div>
+        </div>
+        {% endfor %}
+        <input type="button" id="btn" value="Сохранить">
+        {% load staticfiles %}
+        <script src="{% static "js/jquery.js" %}"></script>
+        <script src="{% static "js/ajax.js" %}"></script>
+        <script src="{% static "js/add_f.js" %}"></script>
+
+
         </form>
       <script>
       document.getElementById("id_dep_time").type="datetime-local";
