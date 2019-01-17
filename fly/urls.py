@@ -36,6 +36,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add_f/', views.add_f),
     path('search_view/', views.search),
+    path('check_email/', views.check_reg),
+    path('check_login/', views.check_reg),
     re_path(r'^', views.index),
 ]
 #if settings.DEBUG:

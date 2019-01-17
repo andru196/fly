@@ -84,6 +84,25 @@ def add_f(request):
     fl.save()
     return HttpResponse(fl)
 
+
+def check_reg(request):
+    email = request.GET.get("email")
+    username = request.GET.get("log")
+    print(email)
+    print(username)
+    if (email != None):
+        if (email != ""):
+            us = UserFly.objects.filter(email=email)
+            if us.__len__() == 0:
+                return HttpResponse("OK")
+    elif (username != None):
+        if (username != ""):
+            us = UserFly.objects.filter(username=username)
+            if us.__len__() == 0:
+                return HttpResponse("OK")
+    return HttpResponse("KO!")
+
+
 ###############################################
 #AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX#AJAX##
 ###############################################
